@@ -1,0 +1,12 @@
+# Ignore everything
+/*
+
+# Not these files
+!/*.html
+!/.gitattributes
+!/.gitignore
+!/README.md
+
+# Not these directories
+!/css
+!/js

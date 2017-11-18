@@ -1,0 +1,106 @@
+/* General */
+html {
+    box-sizing: border-box;
+    height: 100%;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    min-height: 100%;
+    padding-bottom: 60px;
+    position: relative;
+}
+
+/* /General */
+
+/* Header */
+div.header {
+    background-color: #000000;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 30px;
+    padding: 10px;
+    text-align: center;
+}
+
+div.header a {
+    border: 1px solid #ffffff;
+    color: #ffffff;
+    display: inline-block;
+    height: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    width: 200px;
+}
+
+/* /Header */
+
+/* Scroll top button */
+a.scroll-top {
+    background-color: #000000;
+    bottom: 24px;
+    color: #ffffff;
+    display: none;
+    filter: alpha(opacity=30); /* IE workaround */
+    font-size: 20px;
+    opacity: 0.3;
+    padding: 12px;
+    position: fixed;
+    right: 24px;
+    text-decoration: none;
+}
+
+/* /Scroll top button */
+
+/* Content */
+div.content {
+    display: block;
+    margin-left: 10%;
+    margin-right: 10%;
+    text-align: center;
+}
+
+div.anchor {
+    background-color: #d3d3d3;
+    border: 1px solid #000000;
+    display: block;
+    margin-bottom: 20px;
+    padding: 10px;
+    text-align: center;
+}
+
+div.anchor.f1 {
+    height: 500px;
+}
+
+div.anchor.f2 {
+    height: 1000px;
+}
+
+div.anchor.f3 {
+    height: 100px;
+}
+
+/* /Content */
+
+/* Footer */
+div.footer {
+    background-color: #000000;
+    bottom: 0;
+    color: #ffffff;
+    display: block;
+    height: 50px;
+    left: 0;
+    padding: 10px;
+    position: absolute;
+    right: 0;
+    text-align: center;
+}
+
+/* /Footer */
