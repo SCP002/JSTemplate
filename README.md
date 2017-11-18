@@ -15,7 +15,7 @@ Support **IE8**.<br /><br />
 
 **Cons**:
 * No routing.
-* No hitory handling.<br /><br />
+* No history handling.<br /><br />
 
 For usage, see **index.html**.<br />
 To set default content file, see **js/window-onload-handler.js**.
