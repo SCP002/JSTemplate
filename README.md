@@ -18,4 +18,4 @@ Support **IE8**.<br /><br />
 * No hitory handling.<br /><br />
 
 For usage, see **index.html**.<br />
-To set default template, see **js/window-onload-handler.js**.
+To set default content file, see **js/window-onload-handler.js**.
