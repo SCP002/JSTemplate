@@ -13,5 +13,4 @@ Uses JQuery and History.js.<br /><br />
 * Relatively fast.<br /><br />
 
 For usage, see **index.html**.<br />
-To set default content file, see **js/window-onload-handler.js**.<br />
-To set page title, see **js/reload-handler.js, 'NS_RELOAD.title' variable**.
+To set default content file, see **js/window-onload-handler.js**.

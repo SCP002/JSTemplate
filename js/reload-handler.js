@@ -1,10 +1,13 @@
 var NS_RELOAD = {
-    loadContent: function (file, hash) {
-        var title = 'Page Title';
+    loadContent: function (file, hash, replaceState) {
         var url = '?file=' + file + '&anchor=' + hash.replace('#', '');
 
         $.get(file, function (html) {
-            History.pushState({html: html, hash: hash}, title, url);
+            if (replaceState) {
+                History.replaceState({html: html, hash: hash}, document.title, url);
+            } else {
+                History.pushState({html: html, hash: hash}, document.title, url);
+            }
         });
     },
 
@@ -25,17 +28,16 @@ $('body').on('click', 'a.reload', function (event) {
     var hash = this.hash;
     var file = $(this).data('file');
 
-    NS_RELOAD.loadContent(file, hash);
+    NS_RELOAD.loadContent(file, hash, false);
 });
 
 History.Adapter.bind(window, 'statechange', function () {
     var state = History.getState();
-    var divContent = $('div.content');
 
     if (state.data.html === null) {
         NS_ANCHORS.scrollTo(state.data.hash);
     } else {
-        divContent.html(state.data.html);
+        $('div.content').html(state.data.html);
 
         NS_ANCHORS.scrollTo(state.data.hash);
     }
