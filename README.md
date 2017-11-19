@@ -1,21 +1,17 @@
 ### JSTemplate
 ***
 A simple, single page application template.<br />
-Uses JQuery.<br /><br />
-
-Support **IE8**.<br /><br />
+Uses JQuery and History.js.<br /><br />
 
 **Features**:
-* Smooth scroll after template change.
+* **IE8** support.
+* Routing.
+* History handling.
+* Smooth scroll to the anchor after template change.
 * Sticky (but not fixed) footer.
-* 'Scroll to the top' button.<br /><br />
-
-**Procs**:
+* 'Scroll to the top' button with fading and position change to not to overlap footer.
 * Relatively fast.<br /><br />
 
-**Cons**:
-* No routing.
-* No history handling.<br /><br />
-
 For usage, see **index.html**.<br />
-To set default content file, see **js/window-onload-handler.js**.
+To set default content file, see **js/window-onload-handler.js**.<br />
+To set page title, see **js/reload-handler.js, 'NS_RELOAD.title' variable**.

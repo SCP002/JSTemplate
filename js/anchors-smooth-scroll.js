@@ -16,5 +16,8 @@ var NS_ANCHORS = {
 $('body').on('click', NS_ANCHORS.hrefSelector, function (event) {
     event.preventDefault();
 
-    NS_ANCHORS.scrollTo(this.hash);
+    var file = NS_RELOAD.getURLParameter(window.location.href, 'file');
+    var url = '?file=' + file + '&anchor=' + this.hash.replace('#', '');
+
+    History.pushState({html: null, hash: this.hash}, document.title, url);
 });
