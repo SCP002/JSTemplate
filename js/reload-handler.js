@@ -4,9 +4,17 @@ var NS_RELOAD = {
 
         $.get(file, function (html) {
             if (replaceState) {
-                History.replaceState({html: html, hash: hash, randomData: window.Math.random()}, document.title, url);
+                History.replaceState({
+                    html: html,
+                    hash: hash,
+                    randomData: window.Math.random()
+                }, window.document.title, url);
             } else {
-                History.pushState({html: html, hash: hash, randomData: window.Math.random()}, document.title, url);
+                History.pushState({
+                    html: html,
+                    hash: hash,
+                    randomData: window.Math.random()
+                }, window.document.title, url);
             }
         });
     },
@@ -22,7 +30,7 @@ var NS_RELOAD = {
     }
 };
 
-$('body').on('click', 'a.reload', function (event) {
+$('body').on('click', 'a[data-file]', function (event) {
     event.preventDefault();
 
     var hash = this.hash;
