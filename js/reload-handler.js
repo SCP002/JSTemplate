@@ -4,9 +4,9 @@ var NS_RELOAD = {
 
         $.get(file, function (html) {
             if (replaceState) {
-                History.replaceState({html: html, hash: hash}, document.title, url);
+                History.replaceState({html: html, hash: hash, randomData: window.Math.random()}, document.title, url);
             } else {
-                History.pushState({html: html, hash: hash}, document.title, url);
+                History.pushState({html: html, hash: hash, randomData: window.Math.random()}, document.title, url);
             }
         });
     },

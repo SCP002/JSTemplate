@@ -19,5 +19,5 @@ $('body').on('click', NS_ANCHORS.hrefSelector, function (event) {
     var file = NS_RELOAD.getURLParameter(window.location.href, 'file');
     var url = '?file=' + file + '&anchor=' + this.hash.replace('#', '');
 
-    History.pushState({html: null, hash: this.hash}, document.title, url);
+    History.pushState({html: null, hash: this.hash, randomData: window.Math.random()}, document.title, url);
 });
