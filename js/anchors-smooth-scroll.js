@@ -11,7 +11,7 @@ var NS_ANCHORS = {
     }
 };
 
-$('body').on('click', 'a:not([data-file], .no-scroll)', function (event) {
+$('body').on('click', 'a[href^=\\#]:not([data-file], .no-scroll)', function (event) {
     event.preventDefault();
 
     var file = NS_RELOAD.getURLParameter(window.location.href, 'file');
