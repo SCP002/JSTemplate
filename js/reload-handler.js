@@ -3,8 +3,9 @@
 var NS_RELOAD = {
     loadContent: function (file, hash, replaceState) {
         var url = '?file=' + file + '&anchor=' + hash.replace('#', '');
+        var templatesPath = '/templates/';
 
-        $.get(file, function (html) {
+        $.get(templatesPath + file, function (html) {
             var stateData = {html: html, hash: hash, randomData: window.Math.random()};
 
             if (replaceState) {
@@ -37,6 +38,9 @@ var NS_RELOAD = {
     }
 };
 
+/**
+ Selector: Every <a> element, which not contain class 'ignore' and have a href attribute, value of which starts with #.
+ */
 $('body').on('click', 'a[href^=\\#]:not(.ignore)', function (event) {
     event.preventDefault();
 
@@ -52,8 +56,17 @@ $('body').on('click', 'a[href^=\\#]:not(.ignore)', function (event) {
 
 History.Adapter.bind(window, 'statechange', function () {
     var state = History.getState();
+    var pageTitle = 'JSTemplate';
 
-    $('div.content').html(state.data.html);
+    if (!window.document.title) {
+        window.document.title = pageTitle;
+    }
 
-    NS_RELOAD.scrollTo(state.data.hash);
+    if (state.data.html) {
+        $('div.content').html(state.data.html);
+    }
+
+    if (state.data.hash) {
+        NS_RELOAD.scrollTo(state.data.hash);
+    }
 });

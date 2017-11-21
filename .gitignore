@@ -10,3 +10,4 @@
 # Not these directories
 !/css
 !/js
+!/templates

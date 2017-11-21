@@ -12,5 +12,16 @@ Uses JQuery and History.js.<br /><br />
 * 'Scroll to the top' button with fading and position change to not to overlap footer.
 * Relatively fast.<br /><br />
 
-For usage, see **index.html**.<br />
-To set default content file, see **js/window-onload-handler.js**.
+For usage, see **'index.html'**.<br /><br />
+
+To set default content file and anchor to load when page has just opened,
+see **'js/window-onload-handler.js'**.<br /><br />
+
+To set different directory for content files (templates),
+see **'js/reload-handler.js'**, variable **'templatesPath'**.<br /><br />
+
+To set page title, see **'js/reload-handler.js'**, variable **'pageTitle'**.
+
+**Notes**:
+* Class **'ignore'** used with **'a'** elements to
+tell javascript not to prevent default behavior of this elements.
