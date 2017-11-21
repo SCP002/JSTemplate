@@ -1,4 +1,4 @@
-### [JSTemplate](https://scp002.github.io/JSTemplate/index.html)
+### JSTemplate
 ***
 A simple, single page application template.<br />
 Uses JQuery and History.js.<br /><br />
