@@ -18,8 +18,7 @@ var NS_RELOAD = {
 
     pushHistoryState: function (file, anchor) {
         var url = '?file=' + file + '&anchor=' + anchor;
-        var html = $('div.content').html();
-        var stateData = {html: html, anchor: anchor, randomData: window.Math.random()};
+        var stateData = {html: null, anchor: anchor, randomData: window.Math.random()};
 
         History.pushState(stateData, window.document.title, url);
     },
