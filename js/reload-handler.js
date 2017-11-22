@@ -53,14 +53,13 @@ $('body').on('click', 'a[href^=\\#]:not(.ignore)', function (event) {
     event.preventDefault();
 
     var anchor = this.hash.replace('#', '');
-    var file = $(this).data('file');
+    var targetFile = $(this).data('file');
+    var currentFile = NS_RELOAD.getURLParameter(window.location.href, 'file');
 
-    if (!file) {
-        file = NS_RELOAD.getURLParameter(window.location.href, 'file');
-
-        NS_RELOAD.pushHistoryState(file, anchor);
+    if (!targetFile || targetFile === currentFile) {
+        NS_RELOAD.pushHistoryState(currentFile, anchor);
     } else {
-        NS_RELOAD.loadContent(file, anchor, false);
+        NS_RELOAD.loadContent(targetFile, anchor, false);
     }
 });
 
