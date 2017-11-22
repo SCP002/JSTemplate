@@ -16,6 +16,14 @@ var NS_RELOAD = {
         });
     },
 
+    pushHistoryState: function (file, anchor) {
+        var url = '?file=' + file + '&anchor=' + anchor;
+        var html = $('div.content').html();
+        var stateData = {html: html, anchor: anchor, randomData: window.Math.random()};
+
+        History.pushState(stateData, window.document.title, url);
+    },
+
     getURLParameter: function (url, parameter) {
         var result = new RegExp(parameter + '=([^&]*)').exec(url.substring(1));
 
@@ -49,9 +57,11 @@ $('body').on('click', 'a[href^=\\#]:not(.ignore)', function (event) {
 
     if (!file) {
         file = NS_RELOAD.getURLParameter(window.location.href, 'file');
-    }
 
-    NS_RELOAD.loadContent(file, anchor, false);
+        NS_RELOAD.pushHistoryState(file, anchor);
+    } else {
+        NS_RELOAD.loadContent(file, anchor, false);
+    }
 });
 
 History.Adapter.bind(window, 'statechange', function () {
