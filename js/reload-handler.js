@@ -1,12 +1,12 @@
-// TODO: In loadContent() accept anchor instead of hash?
-
 var NS_RELOAD = {
-    loadContent: function (file, hash, replaceState) {
-        var url = '?file=' + file + '&anchor=' + hash.replace('#', '');
+    pageTitle: 'JSTemplate',
+
+    loadContent: function (file, anchor, replaceState) {
+        var url = '?file=' + file + '&anchor=' + anchor;
         var templatesPath = '/templates/';
 
         $.get(templatesPath + file, function (html) {
-            var stateData = {html: html, hash: hash, randomData: window.Math.random()};
+            var stateData = {html: html, anchor: anchor, randomData: window.Math.random()};
 
             if (replaceState) {
                 History.replaceState(stateData, window.document.title, url);
@@ -26,9 +26,9 @@ var NS_RELOAD = {
         return null;
     },
 
-    scrollTo: function (hash) {
+    scrollTo: function (anchor) {
         var animateParams = {scrollTop: 0};
-        var offset = $(hash).offset();
+        var offset = $('#' + anchor).offset();
 
         if (typeof offset !== 'undefined') {
             animateParams.scrollTop = offset.top - 20;
@@ -44,29 +44,28 @@ var NS_RELOAD = {
 $('body').on('click', 'a[href^=\\#]:not(.ignore)', function (event) {
     event.preventDefault();
 
-    var hash = this.hash;
+    var anchor = this.hash.replace('#', '');
     var file = $(this).data('file');
 
     if (!file) {
         file = NS_RELOAD.getURLParameter(window.location.href, 'file');
     }
 
-    NS_RELOAD.loadContent(file, hash, false);
+    NS_RELOAD.loadContent(file, anchor, false);
 });
 
 History.Adapter.bind(window, 'statechange', function () {
     var state = History.getState();
-    var pageTitle = 'JSTemplate';
 
     if (!window.document.title) {
-        window.document.title = pageTitle;
+        window.document.title = NS_RELOAD.pageTitle;
     }
 
     if (state.data.html) {
         $('div.content').html(state.data.html);
     }
 
-    if (state.data.hash) {
-        NS_RELOAD.scrollTo(state.data.hash);
+    if (state.data.anchor) {
+        NS_RELOAD.scrollTo(state.data.anchor);
     }
 });

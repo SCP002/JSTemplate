@@ -11,7 +11,7 @@ $(window).load(function () {
         anchor = 'top';
     }
 
-    NS_RELOAD.loadContent(file, '#' + anchor, true);
+    NS_RELOAD.loadContent(file, anchor, true);
 
     $('span.year').html(new Date().getFullYear());
 });
