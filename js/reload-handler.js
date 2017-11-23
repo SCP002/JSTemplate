@@ -18,7 +18,8 @@ var NS_RELOAD = {
 
     pushHistoryState: function (file, anchor) {
         var url = '?file=' + file + '&anchor=' + anchor;
-        var stateData = {html: null, anchor: anchor, randomData: window.Math.random()};
+        var html = $('div.content').html();
+        var stateData = {html: html, anchor: anchor, randomData: window.Math.random()};
 
         History.pushState(stateData, window.document.title, url);
     },
@@ -35,19 +36,17 @@ var NS_RELOAD = {
 
     scrollTo: function (anchor) {
         var animateParams = {scrollTop: 0};
-        var offset = $('#' + anchor).offset();
+        var anchorElement = $('#' + anchor);
+        var speed = 500;
 
-        if (typeof offset !== 'undefined') {
-            animateParams.scrollTop = offset.top - 20;
+        if (typeof anchorElement.offset() !== 'undefined') {
+            animateParams.scrollTop = anchorElement.offset().top - 20;
         }
 
-        $('html, body').animate(animateParams, 500);
+        $('html, body').animate(animateParams, speed);
     }
 };
 
-/**
- Selector: Every <a> element, which not contain class 'ignore' and have a href attribute, value of which starts with #.
- */
 $('body').on('click', 'a[href^=\\#]:not(.ignore)', function (event) {
     event.preventDefault();
 
