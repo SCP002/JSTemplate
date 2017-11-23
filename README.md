@@ -20,7 +20,7 @@ see **'js/window-onload-handler.js'**.<br /><br />
 To set different directory for content files (templates),
 see **'js/reload-handler.js'**, variable **'templatesPath'**.<br /><br />
 
-To set page title, see **'js/reload-handler.js'**, variable **'pageTitle'**.
+To set page title, see **'js/reload-handler.js'**, variable **'pageTitle'**.<br />
 
 **Notes**:
 * Class **'ignore'** used with **'a'** elements to
