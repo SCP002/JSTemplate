@@ -4,11 +4,11 @@ $(window).load(function () {
     var anchor = NS_RELOAD.getURLParameter(url, 'anchor');
 
     if (!file) {
-        file = 'f1.html';
+        file = NS_CONFIG.defaultContentFile;
     }
 
     if (!anchor) {
-        anchor = 'top';
+        anchor = NS_CONFIG.defaultAnchor;
     }
 
     NS_RELOAD.loadContent(file, anchor, true);

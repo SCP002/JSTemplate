@@ -1,11 +1,8 @@
 var NS_RELOAD = {
-    pageTitle: 'JSTemplate',
-
     loadContent: function (file, anchor, replaceState) {
         var url = '?file=' + file + '&anchor=' + anchor;
-        var templatesPath = '/templates/';
 
-        $.get(templatesPath + file, function (html) {
+        $.get(NS_CONFIG.templatesPath + file, function (html) {
             var stateData = {html: html, anchor: anchor, randomData: window.Math.random()};
 
             if (replaceState) {
@@ -37,13 +34,12 @@ var NS_RELOAD = {
     scrollTo: function (anchor) {
         var animateParams = {scrollTop: 0};
         var anchorElement = $('#' + anchor);
-        var speed = 500;
 
         if (typeof anchorElement.offset() !== 'undefined') {
-            animateParams.scrollTop = anchorElement.offset().top - 20;
+            animateParams.scrollTop = anchorElement.offset().top + NS_CONFIG.scrollOffset;
         }
 
-        $('html, body').animate(animateParams, speed);
+        $('html, body').animate(animateParams, NS_CONFIG.scrollSpeed);
     }
 };
 
@@ -63,10 +59,6 @@ $('body').on('click', 'a[href^=\\#]:not(.ignore)', function (event) {
 
 History.Adapter.bind(window, 'statechange', function () {
     var state = History.getState();
-
-    if (!window.document.title) {
-        window.document.title = NS_RELOAD.pageTitle;
-    }
 
     if (state.data.html) {
         $('div.content').html(state.data.html);
