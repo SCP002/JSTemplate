@@ -22,10 +22,11 @@ var NS_RELOAD = {
     },
 
     getURLParameter: function (url, parameter) {
-        var result = new RegExp(parameter + '=([^&]*)').exec(url.substring(1));
+        var regExp = new RegExp(parameter + '=([^&#]*)');
+        var encodedResults = regExp.exec(url);
 
-        if (result) {
-            return decodeURIComponent(result[1]);
+        if (encodedResults) {
+            return decodeURIComponent(encodedResults[1]);
         }
 
         return null;
@@ -43,17 +44,23 @@ var NS_RELOAD = {
     }
 };
 
-$('body').on('click', 'a[href^=\\#]:not(.ignore)', function (event) {
-    event.preventDefault();
-
-    var anchor = this.hash.replace('#', '');
+$('body').on('click mousedown', 'a[href^=\\#]:not(.ignore)', function (event) {
     var targetFile = $(this).data('file');
-    var currentFile = NS_RELOAD.getURLParameter(window.location.href, 'file');
+    var targetAnchor = this.hash.replace('#', '');
 
-    if (!targetFile || targetFile === currentFile) {
-        NS_RELOAD.pushHistoryState(currentFile, anchor);
-    } else {
-        NS_RELOAD.loadContent(targetFile, anchor, false);
+    if (event.type === 'click') {
+        event.preventDefault();
+
+        var currentFile = NS_RELOAD.getURLParameter(window.location.href, 'file');
+
+        if (!targetFile || targetFile === currentFile) {
+            NS_RELOAD.pushHistoryState(currentFile, targetAnchor);
+        } else {
+            NS_RELOAD.loadContent(targetFile, targetAnchor, false);
+        }
+    } else if (event.which !== 1) {
+        localStorage.setItem('targetFile', targetFile);
+        localStorage.setItem('targetAnchor', targetAnchor);
     }
 });
 
