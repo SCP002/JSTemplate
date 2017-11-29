@@ -23,8 +23,15 @@ $(window).load(function () {
 
     NS_RELOAD.loadContent(targetFile, targetAnchor, true);
 
+    var navbarItemId = localStorage.getItem('navbarItemId');
+
+    if (navbarItemId) {
+        NS_RELOAD.navbarChangeActive(navbarItemId);
+    }
+
     $('span.year').html(new Date().getFullYear());
 
     localStorage.removeItem('targetFile');
     localStorage.removeItem('targetAnchor');
+    localStorage.removeItem('navbarItemId');
 });

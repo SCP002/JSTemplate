@@ -41,15 +41,26 @@ var NS_RELOAD = {
         }
 
         $('html, body').animate(animateParams, NS_CONFIG.scrollSpeed);
+    },
+
+    navbarChangeActive: function (callerId) {
+        $('div.header').find('a.active').removeClass('active');
+
+        $('#' + callerId).addClass('active');
     }
 };
 
 $('body').on('click mousedown', 'a[href^=\\#]:not(.ignore)', function (event) {
     var targetFile = $(this).data('file');
     var targetAnchor = this.hash.replace('#', '');
+    var isNavbarItem = this.className.indexOf('navbar-item') >= 0;
 
     if (event.type === 'click') {
         event.preventDefault();
+
+        if (isNavbarItem) {
+            NS_RELOAD.navbarChangeActive(this.id);
+        }
 
         var currentFile = NS_RELOAD.getURLParameter(window.location.href, 'file');
 
@@ -61,6 +72,10 @@ $('body').on('click mousedown', 'a[href^=\\#]:not(.ignore)', function (event) {
     } else if (event.which !== 1) {
         localStorage.setItem('targetFile', targetFile);
         localStorage.setItem('targetAnchor', targetAnchor);
+
+        if (isNavbarItem) {
+            localStorage.setItem('navbarItemId', this.id);
+        }
     }
 });
 
