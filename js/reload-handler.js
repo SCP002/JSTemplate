@@ -3,7 +3,13 @@ var NS_RELOAD = {
         var url = '?file=' + file + '&anchor=' + anchor;
 
         $.get(NS_CONFIG.templatesPath + file, function (html) {
-            var stateData = {html: html, anchor: anchor, randomData: window.Math.random()};
+            var activeNavbarItemId = $('div.header').find('a.active').attr('id');
+            var stateData = {
+                html: html,
+                anchor: anchor,
+                activeNavbarItemId: activeNavbarItemId,
+                randomData: window.Math.random()
+            };
 
             if (replaceState) {
                 History.replaceState(stateData, window.document.title, url);
@@ -16,7 +22,13 @@ var NS_RELOAD = {
     pushHistoryState: function (file, anchor) {
         var url = '?file=' + file + '&anchor=' + anchor;
         var html = $('div.content').html();
-        var stateData = {html: html, anchor: anchor, randomData: window.Math.random()};
+        var activeNavbarItemId = $('div.header').find('a.active').attr('id');
+        var stateData = {
+            html: html,
+            anchor: anchor,
+            activeNavbarItemId: activeNavbarItemId,
+            randomData: window.Math.random()
+        };
 
         History.pushState(stateData, window.document.title, url);
     },
@@ -70,10 +82,15 @@ $('body').on('click mousedown', 'a[href^=\\#]:not(.ignore)', function (event) {
             NS_RELOAD.loadContent(targetFile, targetAnchor, false);
         }
     } else if (event.which !== 1) {
-        localStorage.setItem('targetFile', targetFile);
-        localStorage.setItem('targetAnchor', targetAnchor);
+        if (targetFile) {
+            localStorage.setItem('targetFile', targetFile);
+        }
 
-        if (isNavbarItem) {
+        if (targetAnchor) {
+            localStorage.setItem('targetAnchor', targetAnchor);
+        }
+
+        if (isNavbarItem && this.id) {
             localStorage.setItem('navbarItemId', this.id);
         }
     }
@@ -88,5 +105,9 @@ History.Adapter.bind(window, 'statechange', function () {
 
     if (state.data.anchor) {
         NS_RELOAD.scrollTo(state.data.anchor);
+    }
+
+    if (state.data.activeNavbarItemId) {
+        NS_RELOAD.navbarChangeActive(state.data.activeNavbarItemId);
     }
 });
