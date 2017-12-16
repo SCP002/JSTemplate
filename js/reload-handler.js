@@ -45,14 +45,17 @@ var NS_RELOAD = {
     },
 
     scrollTo: function (anchor) {
-        var animateParams = {scrollTop: 0};
-        var anchorElement = $('#' + anchor);
+        setTimeout(function () {
+            var animateParams = {scrollTop: 0};
+            var anchorElement = $('#' + anchor);
 
-        if (typeof anchorElement.offset() !== 'undefined') {
-            animateParams.scrollTop = anchorElement.offset().top + NS_CONFIG.scrollOffset;
-        }
+            if (typeof anchorElement.offset() !== 'undefined') {
+                // noinspection JSSuspiciousNameCombination
+                animateParams.scrollTop = window.Math.round(anchorElement.offset().top) + NS_CONFIG.scrollOffset;
+            }
 
-        $('html, body').animate(animateParams, NS_CONFIG.scrollSpeed);
+            $('html, body').animate(animateParams, NS_CONFIG.scrollSpeed);
+        }, 0);
     },
 
     navbarChangeActive: function (callerId) {
