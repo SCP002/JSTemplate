@@ -1,16 +1,16 @@
-var NS_WIN_SCROLL = {
-    scrollTopBottom: parseInt($('a.scroll-top').css('bottom')),
-    footerHeight: parseInt($('div.footer').css('height'))
-};
+var NS_WIN_SCROLL = {};
+
+NS_WIN_SCROLL.scrollTopElement = $('a.scroll-top');
+NS_WIN_SCROLL.scrollTopBottom = parseInt(NS_WIN_SCROLL.scrollTopElement.css('bottom'));
+NS_WIN_SCROLL.footerHeight = parseInt($('div.footer').css('height'));
+
 
 $(window).scroll(function () {
-    var scrollTopBtn = $('a.scroll-top');
-
     // .scroll-top button fading.
     if ($(window).scrollTop() > 200) {
-        scrollTopBtn.fadeIn(200);
+        NS_WIN_SCROLL.scrollTopElement.fadeIn(200);
     } else {
-        scrollTopBtn.fadeOut(200);
+        NS_WIN_SCROLL.scrollTopElement.fadeOut(200);
     }
 
     // .scroll-top button positioning.
@@ -21,6 +21,6 @@ $(window).scroll(function () {
             ($(window).height() - $(window.document).height() + scrollTopSpace) +
             NS_WIN_SCROLL.scrollTopBottom;
 
-        scrollTopBtn.css('bottom', offset);
+        NS_WIN_SCROLL.scrollTopElement.css('bottom', offset);
     }
 });

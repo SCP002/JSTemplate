@@ -1,8 +1,7 @@
-// noinspection JSUnusedGlobalSymbols
-var NS_CONFIG = {
-    templatesPath: './templates/',
-    scrollSpeed: 500,
-    scrollOffset: -20,
-    defaultContentFile: 'f1.html',
-    defaultAnchor: 'top'
-};
+var NS_CONFIG = {};
+
+NS_CONFIG.templatesPath = './templates/';
+NS_CONFIG.scrollSpeed = 500;
+NS_CONFIG.scrollOffset = -20;
+NS_CONFIG.defaultContentFile = 'f1.html';
+NS_CONFIG.defaultAnchor = 'top';
