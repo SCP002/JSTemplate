@@ -7,7 +7,7 @@ NS_RELOAD.pushHistoryState = function (file, html, anchor, replaceState) {
         html = $('div.content').html();
     }
 
-    var activeNavbarItemId = $('div.header').find('a.active').attr('id');
+    var activeNavbarItemId = $('div.header').find('a.active').attr('id'); // TODO: This to config.
     var stateData = {
         html: html,
         anchor: anchor,
@@ -25,6 +25,8 @@ NS_RELOAD.pushHistoryState = function (file, html, anchor, replaceState) {
 NS_RELOAD.loadContent = function (file, anchor, replaceState) {
     $.get(NS_CONFIG.templatesPath + file, function (html) {
         NS_RELOAD.pushHistoryState(file, html, anchor, replaceState);
+
+        NS_CONFIG.whenContentLoaded(file, anchor);
     });
 };
 
@@ -53,7 +55,7 @@ NS_RELOAD.scrollTo = function (anchor) {
     }, 0);
 };
 
-NS_RELOAD.navbarChangeActive = function (callerId) {
+NS_RELOAD.navbarChangeActive = function (callerId) { // TODO: This to config.
     $('div.header').find('a.active').removeClass('active');
 
     $('#' + callerId).addClass('active');

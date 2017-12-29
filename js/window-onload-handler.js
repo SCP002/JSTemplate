@@ -25,6 +25,10 @@ $(window).load(function () {
 
     var navbarItemId = localStorage.getItem('navbarItemId');
 
+    if (!navbarItemId) {
+        navbarItemId = NS_CONFIG.getNavbarItemIdForPage(targetFile, targetAnchor);
+    }
+
     if (navbarItemId) {
         NS_RELOAD.navbarChangeActive(navbarItemId);
     }
