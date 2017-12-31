@@ -30,7 +30,7 @@ $(window).load(function () {
     }
 
     if (navbarItemId) {
-        NS_RELOAD.navbarChangeActive(navbarItemId);
+        NS_CONFIG.navbarChangeActive(navbarItemId);
     }
 
     $('span.year').html(new Date().getFullYear());

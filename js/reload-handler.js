@@ -7,7 +7,7 @@ NS_RELOAD.pushHistoryState = function (file, html, anchor, replaceState) {
         html = $('div.content').html();
     }
 
-    var activeNavbarItemId = $('div.header').find('a.active').attr('id'); // TODO: This to config.
+    var activeNavbarItemId = $(NS_CONFIG.navbarActiveElementSelector).attr('id');
     var stateData = {
         html: html,
         anchor: anchor,
@@ -55,14 +55,8 @@ NS_RELOAD.scrollTo = function (anchor) {
     }, 0);
 };
 
-NS_RELOAD.navbarChangeActive = function (callerId) { // TODO: This to config.
-    $('div.header').find('a.active').removeClass('active');
 
-    $('#' + callerId).addClass('active');
-};
-
-
-$('body').on('click mousedown', 'a[href^=\\#]:not(.ignore)', function (event) {
+$('body').on('click mousedown taphold', 'a[href^=\\#]:not(.ignore)', function (event) {
     var targetFile = $(this).data('file');
     var targetAnchor = this.hash.replace('#', '');
     var isNavbarItem = this.className.indexOf('navbar-item') >= 0;
@@ -71,7 +65,7 @@ $('body').on('click mousedown', 'a[href^=\\#]:not(.ignore)', function (event) {
         event.preventDefault();
 
         if (isNavbarItem) {
-            NS_RELOAD.navbarChangeActive(this.id);
+            NS_CONFIG.navbarChangeActive(this.id);
         }
 
         var currentFile = NS_RELOAD.getURLParameter(window.location.href, 'file');
@@ -81,7 +75,7 @@ $('body').on('click mousedown', 'a[href^=\\#]:not(.ignore)', function (event) {
         } else {
             NS_RELOAD.loadContent(targetFile, targetAnchor, false);
         }
-    } else if (event.which !== 1) {
+    } else if (event.type === 'taphold' || event.which !== 1) {
         if (targetFile) {
             localStorage.setItem('targetFile', targetFile);
         }
@@ -108,6 +102,6 @@ History.Adapter.bind(window, 'statechange', function () {
     }
 
     if (state.data.activeNavbarItemId) {
-        NS_RELOAD.navbarChangeActive(state.data.activeNavbarItemId);
+        NS_CONFIG.navbarChangeActive(state.data.activeNavbarItemId);
     }
 });

@@ -5,10 +5,13 @@ NS_CONFIG.scrollSpeed = 500;
 NS_CONFIG.scrollOffset = -20;
 NS_CONFIG.defaultContentFile = 'f1.html';
 NS_CONFIG.defaultAnchor = 'top';
+NS_CONFIG.navbarActiveElementSelector = 'div.header a.active';
 
-// Use this function to define which navigation bar element should be highlighted when user requests page with specific
-// file and anchor.
 // noinspection JSUnusedLocalSymbols
+/**
+ * Use this function to define which navigation bar element should be highlighted when user requests page with specific
+ * file and anchor.
+ */
 NS_CONFIG.getNavbarItemIdForPage = function (file, anchor) {
     var navbarItemId = null;
 
@@ -23,13 +26,22 @@ NS_CONFIG.getNavbarItemIdForPage = function (file, anchor) {
     return navbarItemId;
 };
 
-// Use this function to define what should be done after the content file was loaded.
+/**
+ * Use this function to define how navigation bar will change active element. Modify it if you need extra logic.
+ */
+NS_CONFIG.navbarChangeActive = function (callerId) {
+    $(NS_CONFIG.navbarActiveElementSelector).removeClass('active');
+
+    $('#' + callerId).addClass('active');
+};
+
 // noinspection JSUnusedLocalSymbols
+/**
+ * Use this function to define what should be done after the content file was loaded.
+ */
 NS_CONFIG.whenContentLoaded = function (file, anchor) {
     // Turn on bootstrap carousel auto play
-    if (file === 'file_with_carousel.html') {
-        $('.carousel').carousel();
-    }
-
-    // ...
+    // if (file === 'file_with_carousel.html') {
+    //    $('.carousel').carousel();
+    // }
 };

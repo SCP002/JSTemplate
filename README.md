@@ -1,7 +1,7 @@
 ### JSTemplate
 ***
 A simple, single page application template.<br />
-Uses JQuery and History.js.<br /><br />
+Uses JQuery, customized JQuery mobile (for touch events) and History.js.<br /><br />
 
 **Features**:
 * IE8 support.
@@ -10,7 +10,7 @@ Uses JQuery and History.js.<br /><br />
 * Smooth scroll to the anchor after template change.
 * Sticky (but not fixed) footer.
 * 'Scroll to the top' button with fading and position change to not to overlap footer.
-* Relatively fast.<br /><br />
+* Works nice on mobile.<br /><br />
 
 ***
 For usage,
