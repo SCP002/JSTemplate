@@ -5,7 +5,7 @@ NS_CONFIG.scrollSpeed = 500;
 NS_CONFIG.scrollOffset = -20;
 NS_CONFIG.defaultContentFile = 'f1.html';
 NS_CONFIG.defaultAnchor = 'top';
-NS_CONFIG.navbarActiveElementSelector = 'div.header a.active';
+NS_CONFIG.navbarActiveElementSelector = 'nav.navbar li.active a';
 
 // noinspection JSUnusedLocalSymbols
 /**
@@ -30,9 +30,9 @@ NS_CONFIG.getNavbarItemIdForPage = function (file, anchor) {
  * Use this function to define how navigation bar will change active element. Modify it if you need extra logic.
  */
 NS_CONFIG.navbarChangeActive = function (callerId) {
-    $(NS_CONFIG.navbarActiveElementSelector).removeClass('active');
+    $(NS_CONFIG.navbarActiveElementSelector).parent().removeClass('active');
 
-    $('#' + callerId).addClass('active');
+    $('#' + callerId).parent().addClass('active');
 };
 
 // noinspection JSUnusedLocalSymbols

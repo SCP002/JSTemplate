@@ -3,7 +3,7 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -15,36 +15,53 @@
 <body>
 
 <div class="header">
-    <span>Header. And something like navigation bar.</span>
+    <span>Header. And something like navigation bar.</span><br>
 
-    <br>
-    <a data-file="f1.html" href="#top" class="navbar-item active" id="nav-p1top">
-        Open page 1, top
-    </a>
+    <nav class="navbar">
+        <ul>
+            <li class="active">
+                <a data-file="f1.html" href="#top" class="navbar-item" id="nav-p1top">
+                    Open page 1, top
+                </a>
+            </li>
 
-    <a data-file="f2.html" href="#anchor2" class="navbar-item" id="nav-p2a2">
-        Open page 2, anchor 2
-    </a>
+            <li>
+                <a data-file="f2.html" href="#anchor2" class="navbar-item" id="nav-p2a2">
+                    Open page 2, anchor 2
+                </a>
+            </li>
 
-    <a data-file="f3.html" href="#top" class="navbar-item" id="nav-p3top">
-        Open page 3, top
-    </a>
+            <li>
+                <a data-file="f3.html" href="#top" class="navbar-item" id="nav-p3top">
+                    Open page 3, top
+                </a>
+            </li>
 
-    <a href="#anchor1" class="navbar-item" id="nav-a1">
-        Go to anchor 1
-    </a>
+            <li>
+                <a href="#anchor1" class="navbar-item" id="nav-a1">
+                    Go to anchor 1
+                </a>
+            </li>
 
-    <a href="#anchor2" class="navbar-item" id="nav-a2">
-        Go to anchor 2
-    </a>
+            <li>
+                <a href="#anchor2" class="navbar-item" id="nav-a2">
+                    Go to anchor 2
+                </a>
+            </li>
 
-    <a href="#anchor3" class="navbar-item ignore" id="nav-a3">
-        Go to anchor 3, ignore
-    </a>
+            <li>
+                <a href="#anchor3" class="navbar-item ignore" id="nav-a3">
+                    Go to anchor 3, ignore
+                </a>
+            </li>
 
-    <a href="https://www.google.com#some_hash_for_testing" class="navbar-item" id="nav-away">
-        Go to Google
-    </a>
+            <li>
+                <a href="https://www.google.com#some_hash_for_testing" class="navbar-item" id="nav-away">
+                    Go to Google
+                </a>
+            </li>
+        </ul>
+    </nav>
 </div>
 
 

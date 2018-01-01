@@ -29,21 +29,30 @@ div.header {
     text-align: center;
 }
 
-div.header a {
+div.header li {
     border: 1px solid #ffffff;
-    color: #ffffff;
     display: inline-block;
     height: 20px;
     margin-right: 20px;
     margin-top: 20px;
+    position: relative;
     width: 200px;
 }
 
-div.header a.active {
+div.header li.active {
     background-color: #232323;
     border-color: #cd5c5c;
     border-bottom-width: 3px;
     border-right-width: 3px;
+}
+
+div.header li a {
+    bottom: 0;
+    color: #ffffff;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 
 /* /Header */
