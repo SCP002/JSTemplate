@@ -42,17 +42,21 @@ NS_RELOAD.getURLParameter = function (url, parameter) {
 };
 
 NS_RELOAD.scrollTo = function (anchor) {
-    setTimeout(function () {
-        var animateParams = {scrollTop: 0};
-        var anchorElement = $('#' + anchor);
+    var interval = setInterval(function () {
+        if (window.document.readyState === 'complete') {
+            var animateParams = {scrollTop: 0};
+            var anchorElement = $('#' + anchor);
 
-        if (typeof anchorElement.offset() !== 'undefined') {
-            // noinspection JSSuspiciousNameCombination
-            animateParams.scrollTop = Math.round(anchorElement.offset().top) + NS_CONFIG.scrollOffset;
+            if (typeof anchorElement.offset() !== 'undefined') {
+                // noinspection JSSuspiciousNameCombination
+                animateParams.scrollTop = Math.round(anchorElement.offset().top) + NS_CONFIG.scrollOffset;
+            }
+
+            $('html, body').animate(animateParams, NS_CONFIG.scrollSpeed);
+
+            clearInterval(interval);
         }
-
-        $('html, body').animate(animateParams, NS_CONFIG.scrollSpeed);
-    }, 0);
+    }, NS_CONFIG.readyStateCheckInterval);
 };
 
 
