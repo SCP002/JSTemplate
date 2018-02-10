@@ -1,7 +1,7 @@
 $(window).load(function () {
     var url = window.location.href;
 
-    var targetFile = localStorage.getItem('targetFile');
+    var targetFile = store.get('targetFile');
 
     if (!targetFile) {
         targetFile = NS_RELOAD.getURLParameter(url, 'file');
@@ -11,7 +11,7 @@ $(window).load(function () {
         }
     }
 
-    var targetAnchor = localStorage.getItem('targetAnchor');
+    var targetAnchor = store.get('targetAnchor');
 
     if (!targetAnchor) {
         targetAnchor = NS_RELOAD.getURLParameter(url, 'anchor');
@@ -23,7 +23,7 @@ $(window).load(function () {
 
     NS_RELOAD.loadContent(targetFile, targetAnchor, true);
 
-    var navbarItemId = localStorage.getItem('navbarItemId');
+    var navbarItemId = store.get('navbarItemId');
 
     if (!navbarItemId) {
         navbarItemId = NS_CONFIG.getNavbarItemIdForPage(targetFile, targetAnchor);
@@ -35,7 +35,7 @@ $(window).load(function () {
 
     $('span.year').html(new Date().getFullYear());
 
-    localStorage.removeItem('targetFile');
-    localStorage.removeItem('targetAnchor');
-    localStorage.removeItem('navbarItemId');
+    store.remove('targetFile');
+    store.remove('targetAnchor');
+    store.remove('navbarItemId');
 });

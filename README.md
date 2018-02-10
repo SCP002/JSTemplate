@@ -1,7 +1,7 @@
 ### JSTemplate
 ***
 A simple, single page application template.<br />
-Uses JQuery, customized JQuery mobile (for touch events) and History.js.<br /><br />
+Uses JQuery, customized JQuery mobile (for touch events), History.js and Store.js.<br /><br />
 
 **Features**:
 * IE8 support.

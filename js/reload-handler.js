@@ -81,15 +81,15 @@ $('body').on('click mousedown taphold', 'a[href^=\\#]:not(.ignore)', function (e
         }
     } else if (event.type === 'taphold' || event.which !== 1) {
         if (targetFile) {
-            localStorage.setItem('targetFile', targetFile);
+            store.set('targetFile', targetFile);
         }
 
         if (targetAnchor) {
-            localStorage.setItem('targetAnchor', targetAnchor);
+            store.set('targetAnchor', targetAnchor);
         }
 
         if (isNavbarItem && this.id) {
-            localStorage.setItem('navbarItemId', this.id);
+            store.set('navbarItemId', this.id);
         }
     }
 });
