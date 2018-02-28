@@ -7,13 +7,11 @@ NS_RELOAD.pushHistoryState = function (file, html, anchor, replaceState) {
         html = $('div.content').html();
     }
 
-    var activeNavbarItemId = $(NS_CONFIG.navbarActiveElementSelector).attr('id');
     var stateData = {
         file: file,
         html: html,
         anchor: anchor,
-        activeNavbarItemId: activeNavbarItemId,
-        randomData: Math.random()
+        randomData: Math.random() // Workaround for https://github.com/browserstate/history.js/issues/293
     };
 
     if (replaceState) {
@@ -62,14 +60,9 @@ NS_RELOAD.scrollTo = function (anchor) {
 $('body').on('click mousedown taphold', 'a[href^=\\#]:not(.ignore)', function (event) {
     var targetFile = $(this).data('file');
     var targetAnchor = this.hash.replace('#', '');
-    var isNavbarItem = this.className.indexOf('navbar-item') >= 0;
 
     if (event.type === 'click') {
         event.preventDefault();
-
-        if (isNavbarItem) {
-            NS_CONFIG.navbarChangeActive(this.id);
-        }
 
         var currentFile = NS_RELOAD.getURLParameter(window.location.href, 'file');
 
@@ -86,27 +79,18 @@ $('body').on('click mousedown taphold', 'a[href^=\\#]:not(.ignore)', function (e
         if (targetAnchor) {
             store.set('targetAnchor', targetAnchor);
         }
-
-        if (isNavbarItem && this.id) {
-            store.set('navbarItemId', this.id);
-        }
     }
 });
 
 History.Adapter.bind(window, 'statechange', function () {
     var state = History.getState();
+    var navbarItemId = NS_CONFIG.getNavbarItemIdForPage(state.data.file, state.data.anchor);
 
-    if (state.data.html) {
-        $('div.content').html(state.data.html);
-    }
+    $('div.content').html(state.data.html);
 
-    if (state.data.anchor) {
-        NS_RELOAD.scrollTo(state.data.anchor);
-    }
+    NS_RELOAD.scrollTo(state.data.anchor);
 
-    if (state.data.activeNavbarItemId) {
-        NS_CONFIG.navbarChangeActive(state.data.activeNavbarItemId);
-    }
+    NS_CONFIG.navbarChangeActive(navbarItemId);
 
     NS_CONFIG.whenStateChanged(state.data.file, state.data.anchor);
 });
