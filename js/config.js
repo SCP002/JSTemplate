@@ -38,9 +38,9 @@ NS_CONFIG.navbarChangeActive = function (callerId) {
 
 // noinspection JSUnusedLocalSymbols
 /**
- * Use this function to define what should be done after the content file was loaded.
+ * Use this function to define what should be done after the browser history state changed.
  */
-NS_CONFIG.whenContentLoaded = function (file, anchor) {
+NS_CONFIG.whenStateChanged = function (file, anchor) {
     // Turn on bootstrap carousel auto play
     // if (file === 'file_with_carousel.html') {
     //    $('.carousel').carousel();

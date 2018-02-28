@@ -9,6 +9,7 @@ NS_RELOAD.pushHistoryState = function (file, html, anchor, replaceState) {
 
     var activeNavbarItemId = $(NS_CONFIG.navbarActiveElementSelector).attr('id');
     var stateData = {
+        file: file,
         html: html,
         anchor: anchor,
         activeNavbarItemId: activeNavbarItemId,
@@ -25,8 +26,6 @@ NS_RELOAD.pushHistoryState = function (file, html, anchor, replaceState) {
 NS_RELOAD.loadContent = function (file, anchor, replaceState) {
     $.get(NS_CONFIG.templatesPath + file, function (html) {
         NS_RELOAD.pushHistoryState(file, html, anchor, replaceState);
-
-        NS_CONFIG.whenContentLoaded(file, anchor);
     });
 };
 
@@ -108,4 +107,6 @@ History.Adapter.bind(window, 'statechange', function () {
     if (state.data.activeNavbarItemId) {
         NS_CONFIG.navbarChangeActive(state.data.activeNavbarItemId);
     }
+
+    NS_CONFIG.whenStateChanged(state.data.file, state.data.anchor);
 });
