@@ -56,6 +56,12 @@ NS_RELOAD.scrollTo = function (anchor) {
     }, NS_CONFIG.readyStateCheckInterval);
 };
 
+NS_RELOAD.navbarChangeActive = function (callerId) {
+    $(NS_CONFIG.navbarActiveElementSelector).parent().removeClass('active');
+
+    $('#' + callerId).parent().addClass('active');
+};
+
 
 $('body').on('click mousedown taphold', 'a[href^=\\#]:not(.ignore)', function (event) {
     var targetFile = $(this).data('file');
@@ -90,7 +96,7 @@ History.Adapter.bind(window, 'statechange', function () {
 
     NS_RELOAD.scrollTo(state.data.anchor);
 
-    NS_CONFIG.navbarChangeActive(navbarItemId);
+    NS_RELOAD.navbarChangeActive(navbarItemId);
 
     NS_CONFIG.whenStateChanged(state.data.file, state.data.anchor);
 });

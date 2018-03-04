@@ -27,15 +27,6 @@ NS_CONFIG.getNavbarItemIdForPage = function (file, anchor) {
     return navbarItemId;
 };
 
-/**
- * Use this function to define how navigation bar will change active element. Modify it if you need extra logic.
- */
-NS_CONFIG.navbarChangeActive = function (callerId) {
-    $(NS_CONFIG.navbarActiveElementSelector).parent().removeClass('active');
-
-    $('#' + callerId).parent().addClass('active');
-};
-
 // noinspection JSUnusedLocalSymbols
 /**
  * Use this function to define what should be done after the browser history state changed.
