@@ -1,4 +1,4 @@
-$(window).load(function () {
+$(window).on('load', function () {
     var url = window.location.href;
 
     var targetFile = store.get('targetFile');
