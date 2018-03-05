@@ -1,6 +1,6 @@
-var NS_RELOAD = {};
+var NS_STATE = {};
 
-NS_RELOAD.pushHistoryState = function (file, html, anchor, replaceState) {
+NS_STATE.pushHistoryState = function (file, html, anchor, replaceState) {
     var url = '?file=' + file + '&anchor=' + anchor;
 
     if (!html) {
@@ -21,13 +21,13 @@ NS_RELOAD.pushHistoryState = function (file, html, anchor, replaceState) {
     }
 };
 
-NS_RELOAD.loadContent = function (file, anchor, replaceState) {
+NS_STATE.loadContent = function (file, anchor, replaceState) {
     $.get(NS_CONFIG.templatesPath + file, function (html) {
-        NS_RELOAD.pushHistoryState(file, html, anchor, replaceState);
+        NS_STATE.pushHistoryState(file, html, anchor, replaceState);
     });
 };
 
-NS_RELOAD.getURLParameter = function (url, parameter) {
+NS_STATE.getURLParameter = function (url, parameter) {
     var regExp = new RegExp(parameter + '=([^&#]*)');
     var encodedResults = regExp.exec(url);
 
@@ -38,7 +38,7 @@ NS_RELOAD.getURLParameter = function (url, parameter) {
     return null;
 };
 
-NS_RELOAD.navbarChangeActive = function (callerId) {
+NS_STATE.navbarChangeActive = function (callerId) {
     $(NS_CONFIG.navbarActiveElementSelector).parent().removeClass('active');
 
     $('#' + callerId).parent().addClass('active');
@@ -52,12 +52,12 @@ $('body').on('click mousedown taphold', 'a[href^=\\#]:not(.ignore)', function (e
     if (event.type === 'click') {
         event.preventDefault();
 
-        var currentFile = NS_RELOAD.getURLParameter(window.location.href, 'file');
+        var currentFile = NS_STATE.getURLParameter(window.location.href, 'file');
 
         if (!targetFile || targetFile === currentFile) {
-            NS_RELOAD.pushHistoryState(currentFile, null, targetAnchor, false);
+            NS_STATE.pushHistoryState(currentFile, null, targetAnchor, false);
         } else {
-            NS_RELOAD.loadContent(targetFile, targetAnchor, false);
+            NS_STATE.loadContent(targetFile, targetAnchor, false);
         }
     } else if (event.type === 'taphold' || event.which !== 1) {
         if (targetFile) {
@@ -78,7 +78,7 @@ History.Adapter.bind(window, 'statechange', function () {
 
     NS_SCROLL.scrollTo(state.data.anchor);
 
-    NS_RELOAD.navbarChangeActive(navbarItemId);
+    NS_STATE.navbarChangeActive(navbarItemId);
 
     NS_CONFIG.whenStateChanged(state.data.file, state.data.anchor);
 });
