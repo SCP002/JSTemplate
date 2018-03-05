@@ -2,15 +2,18 @@ var NS_STATE = {};
 
 NS_STATE.pushHistoryState = function (file, html, anchor, replaceState) {
     var url = '?file=' + file + '&anchor=' + anchor;
+    var isHtmlSame = false;
 
     if (!html) {
         html = $('div.content').html();
+        isHtmlSame = true;
     }
 
     var stateData = {
         file: file,
         html: html,
         anchor: anchor,
+        isHtmlSame: isHtmlSame,
         randomData: Math.random() // Workaround for https://github.com/browserstate/history.js/issues/293
     };
 
@@ -72,7 +75,7 @@ $('body').on('click mousedown taphold', 'a[href^=\\#]:not(.ignore)', function (e
 
 History.Adapter.bind(window, 'statechange', function () {
     var state = History.getState();
-    var navbarItemId = NS_CONFIG.getNavbarItemIdForPage(state.data.file, state.data.anchor);
+    var navbarItemId = NS_CONFIG.getNavbarItemIdForPage(state.data.file, state.data.anchor, state.data.isHtmlSame);
 
     $('div.content').html(state.data.html);
 
@@ -80,5 +83,5 @@ History.Adapter.bind(window, 'statechange', function () {
 
     NS_STATE.navbarChangeActive(navbarItemId);
 
-    NS_CONFIG.whenStateChanged(state.data.file, state.data.anchor);
+    NS_CONFIG.whenStateChanged(state.data.file, state.data.anchor, state.data.isHtmlSame);
 });
