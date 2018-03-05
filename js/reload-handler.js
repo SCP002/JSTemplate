@@ -38,24 +38,6 @@ NS_RELOAD.getURLParameter = function (url, parameter) {
     return null;
 };
 
-NS_RELOAD.scrollTo = function (anchor) {
-    var interval = setInterval(function () {
-        if (window.document.readyState === 'complete') {
-            var animateParams = {scrollTop: 0};
-            var anchorElement = $('#' + anchor);
-
-            if (typeof anchorElement.offset() !== 'undefined') {
-                // noinspection JSSuspiciousNameCombination
-                animateParams.scrollTop = Math.round(anchorElement.offset().top) + NS_CONFIG.scrollOffset;
-            }
-
-            $('html, body').animate(animateParams, NS_CONFIG.scrollSpeed);
-
-            clearInterval(interval);
-        }
-    }, NS_CONFIG.readyStateCheckInterval);
-};
-
 NS_RELOAD.navbarChangeActive = function (callerId) {
     $(NS_CONFIG.navbarActiveElementSelector).parent().removeClass('active');
 
@@ -94,7 +76,7 @@ History.Adapter.bind(window, 'statechange', function () {
 
     $('div.content').html(state.data.html);
 
-    NS_RELOAD.scrollTo(state.data.anchor);
+    NS_SCROLL.scrollTo(state.data.anchor);
 
     NS_RELOAD.navbarChangeActive(navbarItemId);
 
