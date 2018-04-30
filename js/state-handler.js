@@ -25,7 +25,7 @@ NS_STATE.pushHistoryState = function (file, html, anchor, replaceState) {
 };
 
 NS_STATE.loadContent = function (file, anchor, replaceState) {
-    $.get(NS_CONFIG.templatesPath + file, function (html) {
+    $.post(NS_CONFIG.templatesPath + file, function (html) {
         NS_STATE.pushHistoryState(file, html, anchor, replaceState);
     });
 };
